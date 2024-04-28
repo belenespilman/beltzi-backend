@@ -1,0 +1,12 @@
+{
+  "name": "beltzi-backend",
+  "version": "1.0.0",
+  "description": "Beltzi is a robust and interactive platform designed to facilitate the exchange of knowledge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Belen Espilman",
+  "license": "ISC"
+}
