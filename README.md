@@ -22,5 +22,24 @@ npm run dev
 
 #production
 npm start
-´´´
+```
+
+## Migrations
+
+### Generate migrations 
+
+```bash
+npm run migrations:generate ./src/migrations/name-of-the-migration
+```
+
+### Run migrations
+```bash
+npm run migration:run
+```
+
+### Revert migrations
+```bash
+npm run migration:revert
+```
+
 
