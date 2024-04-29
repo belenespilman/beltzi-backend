@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response } from 'express'
 
-const baseRouter: Router = Router();
+const baseRouter: Router = Router()
 
 baseRouter.get('/health', (_req: Request, res: Response) => {
-    res.send('Server is Up')
+  res.send('Server is Up')
 })
 
-export { baseRouter } 
+export { baseRouter }
