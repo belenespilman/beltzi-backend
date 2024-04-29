@@ -1,50 +1,57 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from 'typeorm';
-import { UserRole } from '../enums/userRole.enum';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm'
+import { UserRole } from '../enums/userRole.enum'
 
-@Entity() 
+@Entity()
 export class User {
-    @PrimaryGeneratedColumn('uuid')
-    id!: string 
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-    @Column({
-      type: 'varchar',
-      unique: true,
-      nullable: false  
-    })
-    email!: string
+  @Column({
+    type: 'varchar',
+    unique: true,
+    nullable: false,
+  })
+  email!: string
 
-    @Column({
-        type: 'varchar',
-        nullable: false  
-      })
-    password!: string
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  password!: string
 
-    @Column({
-        type: 'varchar',
-        nullable: false  
-      })
-    firstName!: string
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  firstName!: string
 
-    @Column({
-        type: 'varchar',
-        nullable: false  
-      })
-    lastName!: string
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  lastName!: string
 
-    @Column({
-        type: 'enum',
-        enum: UserRole,
-        nullable: false,
-        default: UserRole.STUDENT
-    })
-    role!: UserRole
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    nullable: false,
+    default: UserRole.STUDENT,
+  })
+  role!: UserRole
 
-    @CreateDateColumn()
-    createdAt!: Date
+  @CreateDateColumn()
+  createdAt!: Date
 
-    @UpdateDateColumn()
-    updatedAt!: Date
+  @UpdateDateColumn()
+  updatedAt!: Date
 
-    @DeleteDateColumn()
-    deletedAt?: Date
+  @DeleteDateColumn()
+  deletedAt?: Date
 }
