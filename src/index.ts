@@ -1,10 +1,13 @@
 import express, { Express } from 'express'
 import { v1Router } from './routes'
+import env from './config/environment'
+import { connectDatabase } from './config/database'
 
 const app: Express = express()
 
+connectDatabase()
 //Config
-app.set('port', 3000)
+app.set('port', env.app.port)
 
 //Middlewares
 
