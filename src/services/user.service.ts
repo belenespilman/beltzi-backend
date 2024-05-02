@@ -4,6 +4,7 @@ import { TokenResponse } from '../models/interfaces/tokenResponse.interface'
 import bcrypt from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import environment from '../config/environment'
+import { LoginUserDto } from '../models/DTO/loginuser.dto'
 
 export class UserService {
   userRepository: UserRepository
@@ -28,6 +29,29 @@ export class UserService {
     )
     return {
       message: 'SUCCESS',
+      data: {
+        token,
+      },
+    }
+  }
+
+  async loginUser(body: LoginUserDto): Promise<TokenResponse> {
+    const user = await this.userRepository.getUserByEmail(body.email)
+    if (!user) {
+      throw new Error('No user was found')
+    }
+    const passwordsMatch = bcrypt.compareSync(body.password, user.password)
+    if (!passwordsMatch) {
+      throw new Error('Invalid password')
+    }
+    const token = sign(
+      {
+        id: user.id,
+      },
+      environment.jwtSecret as string,
+    )
+    return {
+      message: 'SUCCESSFUL LOGIN',
       data: {
         token,
       },

@@ -16,4 +16,17 @@ export class UserRepository {
       throw new Error('Error when creating user')
     }
   }
+
+  async getUserByEmail(email: string): Promise<User | null> {
+    try {
+      const user = await this.repository.findOne({
+        where: {
+          email,
+        },
+      })
+      return user
+    } catch (error) {
+      throw new Error('User not found')
+    }
+  }
 }
