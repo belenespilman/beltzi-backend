@@ -8,6 +8,7 @@ const app: Express = express()
 connectDatabase()
 //Config
 app.set('port', env.app.port)
+app.use(express.json())
 
 //Middlewares
 
