@@ -3,6 +3,7 @@ import { UserRepository } from '../repositories/user.repository'
 import { TokenResponse } from '../models/interfaces/tokenResponse.interface'
 import bcrypt from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
+import environment from '../config/environment'
 
 export class UserService {
   userRepository: UserRepository
@@ -11,7 +12,7 @@ export class UserService {
   }
 
   async createUser(body: CreateUserDTO): Promise<TokenResponse> {
-    const salt = bcrypt.genSaltSync(10)
+    const salt = bcrypt.genSaltSync(environment.saltRounds)
     const hashedPassword = bcrypt.hashSync(body.password, salt)
 
     const userData: CreateUserDTO = {
@@ -23,7 +24,7 @@ export class UserService {
       {
         id: user.id,
       },
-      'admin123',
+      environment.jwtSecret as string,
     )
     return {
       message: 'SUCCESS',

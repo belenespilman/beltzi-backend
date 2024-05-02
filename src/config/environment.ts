@@ -13,4 +13,7 @@ export default {
   app: {
     port: process.env.APP_PORT,
   },
+
+  jwtSecret: process.env.JWT_SECRET,
+  saltRounds: Number(process.env.SALT_ROUNDS),
 }
