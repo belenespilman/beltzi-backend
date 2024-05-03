@@ -5,6 +5,9 @@ import bcrypt from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import environment from '../config/environment'
 import { LoginUserDto } from '../models/DTO/loginuser.dto'
+import { GetUserProfileResponse } from '../models/interfaces/getUserProfileResponse.interface'
+import { decodeToken } from '../utils/decodeToken.function'
+import { User } from '../models/entities/user.entity'
 
 export class UserService {
   userRepository: UserRepository
@@ -55,6 +58,20 @@ export class UserService {
       data: {
         token,
       },
+    }
+  }
+
+  async getUserProfile(token: string): Promise<GetUserProfileResponse> {
+    const id: string = decodeToken(token)
+    const user: User | null = await this.userRepository.getUserInformation(id)
+    if (!user) {
+      throw new Error('User not found')
+    }
+    // eslint-disable-next-line  @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPassword } = user
+    return {
+      message: 'OK_SUCCESSFUL_OPERATION',
+      data: userWithoutPassword,
     }
   }
 }

@@ -26,7 +26,20 @@ export class UserRepository {
       })
       return user
     } catch (error) {
-      throw new Error('User not found')
+      throw new Error('Error when getting user by email')
+    }
+  }
+
+  async getUserInformation(id: string): Promise<User | null> {
+    try {
+      const user = await this.repository.findOne({
+        where: {
+          id,
+        },
+      })
+      return user
+    } catch (error) {
+      throw new Error('Error when getting user information')
     }
   }
 }
